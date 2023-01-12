@@ -1,0 +1,16 @@
+*{
+    margin: 0;padding: 0;
+}
+.board-row{
+    position: relative;
+    width: 200px;
+}
+.square{
+    float: left;
+    font-size: 30px;
+    background-color: white;
+    border: 1px gray solid;
+    width: 60px;height: 60px;
+    text-align: center;line-height: 60px;
+    box-sizing: border-box;
+}

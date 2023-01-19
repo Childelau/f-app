@@ -9,10 +9,7 @@ function Square({value, onSquareClick}) {
 }
 
 
-function Board(){
-    const [squares, setSquares] = useState(Array(9).fill(null))
-    const [xIsNext, setxIsNext] = useState(true)
-
+function Board({ xIsNext, squares, onPlay }){
     function handleClick(i) {
         if (squares[i] || calculateWinner(squares)) {
             return
@@ -21,8 +18,7 @@ function Board(){
         const nextSquares = squares.slice()
         //根据xIsNext判断下一个点击输出
         xIsNext? nextSquares[i] = 'X': nextSquares[i] = 'O'
-        setSquares(nextSquares)
-        setxIsNext(!xIsNext)
+        onPlay(nextSquares)
     }
     const winner = calculateWinner(squares)
     let status
@@ -55,6 +51,34 @@ function Board(){
 }
 
 
+//top-level component
+export default function Game() {
+    const [xIsNext, setxIsNext] = useState(true)
+    const [history, setHistory] = useState([Array(9).fill(null)])
+    const currentSquares = history[history.length - 1]
+
+    function handlePlay(nextSquares) {
+        //
+        setHistory([...history, nextSquares])
+        setxIsNext(!xIsNext)
+    }
+
+
+    return (
+        <div className='game'>
+            <div className='game-board'>
+                <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
+            </div>
+            <div className='game-info'>
+                <ol></ol>
+            </div>
+        </div>
+    )
+}
+
+
+
+
 function calculateWinner(squares) {
     const lines = [
         [0, 1, 2],
@@ -75,6 +99,3 @@ function calculateWinner(squares) {
     return null  
 }
 
-
-
-export default Board

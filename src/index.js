@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import MyButton from './views/game/index'
-import Game from './views/game/index1'
+import FilterableProductTable from './views/game/index1'
 import Profile from './views/initComponent/fComponent';
 
 
@@ -16,7 +16,7 @@ root.render(
       <Routes>
         <Route path='/' element={<App />}></Route>
         <Route path='game' element={<MyButton />}></Route>
-        <Route path='game1' element={<Game />}></Route>
+        <Route path='FilterableProductTable' element={<FilterableProductTable />}></Route>
         <Route path='fcomponent' element={<Profile />}></Route>
 
 

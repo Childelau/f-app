@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyButton from './views/game/index'
 import FilterableProductTable from './views/game/index1'
 import Profile from './views/initComponent/fComponent';
+import Event from './views/interactivity/event'
+import States from './views/interactivity/state';
+import StateSnapshot from './views/interactivity/stateSnapshot';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +21,11 @@ root.render(
         <Route path='game' element={<MyButton />}></Route>
         <Route path='FilterableProductTable' element={<FilterableProductTable />}></Route>
         <Route path='fcomponent' element={<Profile />}></Route>
+        <Route path='event' element={<Event />}></Route>
+        <Route path='States' element={<States />}></Route>
+        <Route path='StateSnapshot' element={<StateSnapshot />}></Route>
+
+
 
 
       </Routes>

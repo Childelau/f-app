@@ -10,6 +10,9 @@ import Profile from './views/initComponent/fComponent';
 import Event from './views/interactivity/event'
 import States from './views/interactivity/state';
 import StateSnapshot from './views/interactivity/stateSnapshot';
+import StateUpdate from './views/interactivity/stateUpdate';
+import StateObject from './views/interactivity/stateObject';
+import StateArray from './views/interactivity/stateArray';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -24,6 +27,9 @@ root.render(
         <Route path='event' element={<Event />}></Route>
         <Route path='States' element={<States />}></Route>
         <Route path='StateSnapshot' element={<StateSnapshot />}></Route>
+        <Route path='StateUpdate' element={<StateUpdate />}></Route>
+        <Route path='StateObject' element={<StateObject />}></Route>
+        <Route path='StateArray' element={<StateArray />}></Route>
 
 
 

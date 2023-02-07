@@ -13,6 +13,8 @@ import StateSnapshot from './views/interactivity/stateSnapshot';
 import StateUpdate from './views/interactivity/stateUpdate';
 import StateObject from './views/interactivity/stateObject';
 import StateArray from './views/interactivity/stateArray';
+import InputState from './views/manageState/inputState';
+import ShareState from './views/manageState/shareState';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -30,6 +32,11 @@ root.render(
         <Route path='StateUpdate' element={<StateUpdate />}></Route>
         <Route path='StateObject' element={<StateObject />}></Route>
         <Route path='StateArray' element={<StateArray />}></Route>
+        <Route path='InputState' element={<InputState />}></Route>
+        <Route path='ShareState' element={<ShareState />}></Route>
+
+
+        
 
 
 

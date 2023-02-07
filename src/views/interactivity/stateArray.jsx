@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useImmer } from "use-immer"
 
 export default function StateArray() {
     return (
@@ -7,6 +8,8 @@ export default function StateArray() {
             <RemovingList />
             <TransformingList />
             <ReplacingArray />
+            <UpdatingObjectsArray />
+            <UpdatingObjectsArrayImmer />
         </>
     )
 }
@@ -157,5 +160,124 @@ function ReplacingArray() {
             }
         </ul>
         
+    )
+}
+
+//Updating objects inside arrays
+/**
+ * @important
+ * Objects are not really located “inside” arrays. They might appear to be “inside” in code, but each object in an array is a separate value, to which the array “points”.
+ * 
+ */
+
+// let nextId_ = 3;
+const objectList = [
+    { id: 0, title: 'Big Bellies', seen: false },
+    { id: 1, title: 'Lunar Landscape', seen: false },
+    { id: 2, title: 'Terracotta Army', seen: true }
+]
+function UpdatingObjectsArray() {
+    const [myList, setMyList] = useState(objectList)
+    const [yourList, setYourList] = useState(objectList)
+
+    function handleToggleMyList(itemId, nextSeen) {
+        let myNextList = [...myList]
+        setMyList(myNextList.map(item => {
+            if (item.id === itemId) {
+                return {...item, seen: nextSeen}
+            } else {
+                return item
+            }
+        }))
+    }
+
+    function handleToggleYourList(itemId, nextSeen) {
+        console.log(nextSeen)
+        let yourNextList = [...yourList]
+        setYourList(yourNextList.map(item => {
+            if (item.id === itemId) {
+                return {...item, seen: nextSeen}
+            } else {
+                return item
+            }
+        }))
+        console.log(yourNextList)
+    }
+
+
+    return (
+        <>
+            <h1>Updating objects inside arrays</h1>
+            <UOAItemList objectList={myList} onToggle={handleToggleMyList}/>
+            <UOAItemList objectList={yourList} onToggle={handleToggleYourList}/>
+
+        </>
+    )
+}
+function UOAItemList({objectList, onToggle}) {
+    return (
+        <ul>
+            {objectList.map(item => (
+                <li key={item.id}>
+                    <label>
+                        <input type="checkbox" checked={item.seen} onChange={e => onToggle(item.id, e.target.checked)}/>
+                        {item.title}
+                    </label>
+                </li>
+            ))
+            }
+        </ul>
+    )
+}
+
+
+//Immer
+const immerList = [
+    { id: 0, title: 'Big Bellies', seen: false },
+    { id: 1, title: 'Lunar Landscape', seen: false },
+    { id: 2, title: 'Terracotta Army', seen: true }
+]
+function UpdatingObjectsArrayImmer() {
+    const [myList, updateMyList] = useImmer(immerList)
+    const [yourList, updateYourList] = useImmer(immerList)
+
+    function handleToggleMyList(id, nextSeen) {
+        updateMyList(draft => {
+            const item = draft.find(a => a.id === id)
+            item.seen = nextSeen
+        })
+        
+    }
+
+    function handleToggleYourList(id, nextSeen) {
+        updateYourList(draft => {
+            const item = draft.find(a => a.id === id)
+            item.seen = nextSeen
+        })
+    }
+
+
+    return (
+        <>
+            <h1>Updating Objects Array Immer</h1>
+            <UOAIItemList objectList={myList} onToggle={handleToggleMyList}/>
+            <UOAIItemList objectList={yourList} onToggle={handleToggleYourList}/>
+
+        </>
+    )
+}
+function UOAIItemList({objectList, onToggle}) {
+    return (
+        <ul>
+            {objectList.map(item => (
+                <li key={item.id}>
+                    <label>
+                        <input type="checkbox" checked={item.seen} onChange={e => onToggle(item.id, e.target.checked)}/>
+                        {item.title}
+                    </label>
+                </li>
+            ))
+            }
+        </ul>
     )
 }

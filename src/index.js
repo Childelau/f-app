@@ -15,6 +15,8 @@ import StateObject from './views/interactivity/stateObject';
 import StateArray from './views/interactivity/stateArray';
 import InputState from './views/manageState/inputState';
 import ShareState from './views/manageState/shareState';
+import ResetState from './views/manageState/resetState';
+import Reducer from './views/manageState/reducer';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -34,7 +36,8 @@ root.render(
         <Route path='StateArray' element={<StateArray />}></Route>
         <Route path='InputState' element={<InputState />}></Route>
         <Route path='ShareState' element={<ShareState />}></Route>
-
+        <Route path='ResetState' element={<ResetState />}></Route>
+        <Route path='Reducer' element={<Reducer />}></Route>
 
         
 
